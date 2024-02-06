@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { Question } from '@/components/RightContent';
-import { getLoginUserUsingGet } from '@/services/yubi/userController';
+import { getLoginUserUsingGet } from '@/services/rico/userController';
 import { LinkOutlined } from '@ant-design/icons';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
@@ -9,7 +9,8 @@ import { AvatarDropdown, AvatarName } from './components/RightContent/AvatarDrop
 import { errorConfig } from './requestConfig';
 import DefaultSettings from "../config/defaultSettings";
 
-const isDev = process.env.NODE_ENV === 'development';
+// const isDev = process.env.NODE_ENV === 'development';
+const isDev = false;
 const loginPath = '/user/login';
 
 /**
@@ -37,7 +38,6 @@ export async function getInitialState(): Promise<{
       settings:DefaultSettings
     };
   }
-
   return {};
 }
 
@@ -54,14 +54,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     waterMarkProps: {
       content: initialState?.currentUser?.userName,
-    },
-    footerRender: () => <Footer />,
-    onPageChange: () => {
-      const { location } = history;
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
-      }
     },
     links: isDev
       ? [

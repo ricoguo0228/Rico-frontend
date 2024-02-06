@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Avatar, Button, Col, Descriptions,  Divider, message, Row} from "antd";
 import UpdateUserInfo from "@/pages/User/Center/components/UpdateModal";
 import {ActionType, ProColumns, ProTable} from "@ant-design/pro-components";
-import {getLoginUserUsingGet, updateUserUsingPost} from "@/services/yubi/userController";
+import {getLoginUserUsingGet, updateUserUsingPost} from "@/services/rico/userController";
 
 
 const Center: React.FC = () => {
@@ -12,7 +12,7 @@ const Center: React.FC = () => {
     const getUser = async () => {
         try {
             const res = await getLoginUserUsingGet();
-            if (res.code !== 0) {
+            if (res.code !== 20000) {
                 message.error("获取用户失败！");
                 return;
             }

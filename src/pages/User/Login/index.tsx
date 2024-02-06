@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import { listChartByPageUsingPost } from '@/services/yubi/chartController';
-import { getLoginUserUsingGet, userLoginUsingPost } from '@/services/yubi/userController';
+import { getLoginUserUsingGet, userLoginUsingPost } from '@/services/rico/userController';
 import { Link } from '@@/exports';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
@@ -10,6 +10,7 @@ import { message, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Settings from '../../../../config/defaultSettings';
+import DefaultSettings from "../../../../config/defaultSettings";
 
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
@@ -31,10 +32,11 @@ const Login: React.FC = () => {
    */
   const fetchUserInfo = async () => {
     const userInfo = await getLoginUserUsingGet();
-    if (userInfo.code === 0) {
+    if (userInfo.code === 20000) {
       flushSync(() => {
         setInitialState({
           currentUser: userInfo.data,
+          settings:DefaultSettings
         });
       });
     }
@@ -44,7 +46,7 @@ const Login: React.FC = () => {
     try {
       // 登录
       const res = await userLoginUsingPost(values);
-      if (res.code === 0) {
+      if (res.code === 20000) {
         const defaultLoginSuccessMessage = '登录成功！';
         message.success(defaultLoginSuccessMessage);
         await fetchUserInfo();
@@ -79,7 +81,7 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo"  src={Settings.logo} />}
-          title="RBI 数据分析平台"
+          title="Rico 人工智能"
 
           onFinish={async (values) => {
             await handleSubmit(values as API.UserLoginRequest);

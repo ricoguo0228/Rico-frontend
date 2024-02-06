@@ -1,4 +1,4 @@
-import { genChartByAiUsingPost } from '@/services/yubi/chartController';
+import { genChartByAiUsingPost } from '@/services/rico/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import {Button, Card, Col, Divider, Form, Input, message, Row, Select, Space, Spin, Upload} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
@@ -9,7 +9,7 @@ import ReactECharts from 'echarts-for-react';
  * 添加图表页面
  * @constructor
  */
-const AddChart: React.FC = () => {
+const shuli: React.FC = () => {
   const [chart, setChart] = useState<API.BiResponse>();
   const [option, setOption] = useState<any>();
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -113,4 +113,4 @@ const AddChart: React.FC = () => {
     </div>
   );
 };
-export default AddChart;
+export default shuli;

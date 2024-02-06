@@ -7,7 +7,7 @@ import type {MenuInfo} from 'rc-menu/lib/interface';
 import React, {useCallback} from 'react';
 import {flushSync} from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
-import {userLogoutUsingPost} from "@/services/yubi/userController";
+import {userLogoutUsingPost} from "@/services/rico/userController";
 
 export type GlobalHeaderRightProps = {
     menu?: boolean;
@@ -26,7 +26,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({menu, children
      */
     const loginOut = async () => {
         const res = await userLogoutUsingPost();
-        if (res.code !== 0) {
+        if (res.code !== 20000) {
             message.error("退出登录失败");
             return;
         }

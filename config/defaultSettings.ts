@@ -15,7 +15,7 @@ const Settings: ProLayoutProps & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'RBI智能分析平台',
+  title: 'Rico 人工智能',
   pwa: true,
   logo: 'https://avatars.githubusercontent.com/u/113654954?v=4',
   iconfontUrl: '',

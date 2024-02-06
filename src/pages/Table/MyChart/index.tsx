@@ -1,4 +1,4 @@
-import {deleteChartUsingPost, listMyChartByPageUsingPost} from '@/services/yubi/chartController';
+import {deleteChartUsingPost, listMyChartByPageUsingPost} from '@/services/rico/chartController';
 
 import {useModel} from '@@/exports';
 import {Avatar, Button, Card, List, message, Modal, Result, Space} from 'antd';
@@ -37,14 +37,15 @@ const MyChartPage: React.FC = () => {
         try {
             const res = await listMyChartByPageUsingPost(searchParams);
             if (res.data) {
-                setChartList(res.data.records ?? []);
+                setChartList(res.data ?? []);
                 setTotal(res.data.total ?? 0);
                 // 隐藏图表的 title
-                if (res.data.records) {
-                    res.data.records.forEach(data => {
+                if (res.code === 20000) {
+                    res.data.forEach(data => {
                         if (data.status === 'succeed') {
                             const chartOption = JSON.parse(data.genChart ?? '{}');
                             chartOption.title = undefined;
+                            console.log(chartOption)
                             data.genChart = JSON.stringify(chartOption);
                         }
                     })
@@ -61,7 +62,7 @@ const MyChartPage: React.FC = () => {
         const res = await deleteChartUsingPost({
             id: currentChart?.id
         });
-        if (res.code === 0) {
+        if (res.code === 20000) {
             message.success('删除成功');
             setDeleteShow(false);
             await loadData();

@@ -3,10 +3,7 @@ import '@umijs/max';
 export type SiderTheme = 'light' | 'dark';
 export const SelectLang = () => {
   return (
-    <UmiSelectLang
-      style={{
-        padding: 4,
-      }}
+    <SelectLang
     />
   );
 };
@@ -21,7 +18,6 @@ export const Question = () => {
         window.open('https://pro.ant.design/docs/getting-started');
       }}
     >
-      <QuestionCircleOutlined />
     </div>
   );
 };

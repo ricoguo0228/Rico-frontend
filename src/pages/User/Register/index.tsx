@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
-import { listChartByPageUsingPost } from '@/services/yubi/chartController';
-import {getLoginUserUsingGet, userLoginUsingPost, userRegisterUsingPost} from '@/services/yubi/userController';
+import { listChartByPageUsingPost } from '@/services/rico/chartController';
+import {getLoginUserUsingGet, userLoginUsingPost, userRegisterUsingPost} from '@/services/rico/userController';
 import { Link } from '@@/exports';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
    */
   const fetchUserInfo = async () => {
     const userInfo = await getLoginUserUsingGet();
-    if (userInfo.code === 0) {
+    if (userInfo.code === 20000) {
       flushSync(() => {
         setInitialState({
           currentUser: userInfo.data,
@@ -45,14 +45,14 @@ const Login: React.FC = () => {
     try {
       // 登录
       const res1 = await userRegisterUsingPost(values);
-      if (res1.code === 0) {
+      if (res1.code === 20000) {
         const defaultLoginSuccessMessage = '注册成功,正在为您登录';
         message.success(defaultLoginSuccessMessage);
         const res2 = await userLoginUsingPost({
           userAccount:values.userAccount,
           userPassword:values.userPassword
         });
-        if(res2.code === 0){
+        if(res2.code === 20000){
           await fetchUserInfo();
           const urlParams = new URL(window.location.href).searchParams;
           history.push(urlParams.get('redirect') || '/');
@@ -87,8 +87,8 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="RBI 数据分析平台"
+          logo={<img alt="logo" src={Settings.logo} />}
+          title="Rico 人工智能"
           onFinish={async (values) => {
             await handleSubmit(values as API.UserRegisterRequest);
           }}

@@ -1,4 +1,4 @@
-import { genChartByAiAsyncMqUsingPost } from '@/services/yubi/chartController';
+import { genChartByAiAsyncMqUsingPost } from '@/services/rico/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, message, Select, Space, Upload } from 'antd';
 import { useForm } from 'antd/es/form/Form';
